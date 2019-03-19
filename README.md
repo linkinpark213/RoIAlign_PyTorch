@@ -39,8 +39,8 @@ Equal to `feature_map_width / original_image_width`.
 * __sampling_ratio__ - An integer: the sampling ratio for RoI alignment.
 
 Inputs: input, rois
-* __input__ - A `torch.Tensor` of shape (batch, num_channels, height, width): a batch of feature maps.
-* __rois__ - A `torch.Tensor` of shape (total_num_rois, 5): the batch indices and coordinates of all RoIs.
+* __input__ - A `torch.Tensor` of shape `(batch, num_channels, height, width)`: a batch of feature maps.
+* __rois__ - A `torch.Tensor` of shape `(total_num_rois, 5)`: the batch indices and coordinates of all RoIs.
 Each line of this tensor is an RoI with data (batch_index, x1, y1, x2, y2), 
 since one feature map could correspond to several RoIs.
 `x1, y1, x2, y2` denotes the coordinates of the top-left corner and the bottom-right corner of each RoI in the original image.
@@ -62,8 +62,8 @@ Parameters:
 Equal to `feature_map_width / original_image_width`.
 
 Inputs: input, rois
-* __input__ - A `torch.Tensor` of shape (batch, num_channels, height, width): a batch of feature maps.
-* __rois__ - A `torch.Tensor` of shape (total_num_rois, 5): the batch indices and coordinates of all RoIs.
+* __input__ - A `torch.Tensor` of shape `(batch, num_channels, height, width)`: a batch of feature maps.
+* __rois__ - A `torch.Tensor` of shape `(total_num_rois, 5)`: the batch indices and coordinates of all RoIs.
 Each line of this tensor is an RoI with data (batch_index, x1, y1, x2, y2), 
 since one feature map could correspond to several RoIs.
 `x1, y1, x2, y2` denotes the coordinates of the top-left corner and the bottom-right corner of each RoI in the original image.
@@ -72,19 +72,19 @@ while values of `y1` and `y2` should be between `0` and `original_image_height`.
 If their values exceeds the range of original image size, the exceeded part would be padded with 0.
 
 Outputs: output
-* __output__ - A `torch.Tensor` of shape (total_num_rois, num_channels, output_size[0], output_size[1]).
+* __output__ - A `torch.Tensor` of shape `(total_num_rois, num_channels, output_size[0], output_size[1])`.
 
 ### nms
 ```python
 nms(dets: torch.Tensor, scores: torch.Tensor, overlap_threshold: float) -> torch.Tensor
 ```
 Parameters:
-* __dets__ - A `torch.Tensor` of shape (num_detection, 4): top-left and bottom-right coordinates of all detected boxes.
-* __scores__ - A `torch.Tensor` of shape (num_detection): detection scores of all the boxes.
+* __dets__ - A `torch.Tensor` of shape `(num_detection, 4)`: top-left and bottom-right coordinates of all detected boxes.
+* __scores__ - A `torch.Tensor` of shape `(num_detection)`: detection scores of all the boxes.
 * __overlap_threshold__ - A floating point number: the overlapping threshold. If two boxes have a higher IoU than the threshold, the box with lower score will be removed.
 
 Returns:
-* __indices__ - A `torch.Tensor` of shape (num_filtered_detection): the indices of remaining boxes after filtering by non-max-suppression.
+* __indices__ - A `torch.Tensor` of shape `(num_filtered_detection)`: the indices of remaining boxes after filtering by non-max-suppression.
 
 ## Issues
 * Segmentation faults occurs on certain circumstances. The root cause is yet to be found.
